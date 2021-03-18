@@ -1,0 +1,91 @@
+
+/*
+av20099
+
+Abâs realizâcijâs ir jâizveido prasîtâ specifiskâ vçrtîbu virknes apstrâdes funkcija un jânodemonstrç tâ darbîbâ,
+cita starpâ parâdot gan sâkotnçjâs, gan rezultçjoðâs vçrtîbas. 
+Abâs programmâs:   
+  a) jâbût iespçjai ievadît saraksta elementus (izveidot patvaïîgu sarakstu),
+  b) jâpielieto uzrakstîtâ funkcija sarakstam,  
+  c) jâizdrukâ saraksts pçc funkcijas darbîbas.  
+  d) beigâs jâiznîcina saraksts - korekti jâatbrîvo izdalîtâ atmiòa(lietojot delete vai clear).
+Sîkâkas prasîbas sk. Laboratorijas darbu noteikumos.
+G9. Uzrakstît funkciju, kas pârbauda, vai sarakstâ ir  vismaz divi elementi ar vienâdâm vçrtîbâm.
+*/
+
+#include <iostream>
+using std::cout; using std::endl;  using std::cin;
+
+struct elem
+{
+    int num;
+    elem* next;
+};
+
+bool isUnique(elem* pirmais) {
+    elem* it1 = pirmais;
+    
+    for (it1; it1->next != NULL; it1 = it1->next)
+    {
+        for (elem* it2 =it1->next; it2 != NULL; it2 = it2->next)
+            if (it1->num == it2->num) {
+                return false;
+        }
+    };
+    return true;
+
+}
+
+
+
+void addElem(elem*& pirmais, elem*& pedejais, int i)
+{
+    elem* p = new elem;
+    p->num = i;
+    p->next = NULL;
+    if (pirmais == NULL) pirmais = p;
+    else pedejais->next = p;
+    pedejais = p;
+};
+
+void printList(elem* pirmais)
+{
+    for (elem* p = pirmais; p != NULL; p = p->next)
+    {
+        cout << p->num << " ";
+    };
+    cout << endl;
+};
+
+void delList(elem*& pirmais)
+{
+    elem* p = pirmais;
+    while (p != NULL)
+    {
+        pirmais = pirmais->next;
+        delete p;
+        p = pirmais;
+    };
+}
+
+
+int main()
+{
+    elem* pirmais = NULL, * pedejais = NULL, * p;
+    int i;
+    cout << "Ievadiet saraksta elementus (0-beigt ievadu):" << endl;
+    cin >> i;
+    while (i != 0)
+    {
+        addElem(pirmais, pedejais, i);
+        cin >> i;
+    };
+    printList(pirmais);
+    bool ir = isUnique(pirmais);
+    if (ir) cout << "Saraksta elementi ir unikaali!" << endl;
+    else cout << "Saraksta elementi atkaartojas!" << endl;
+    delList(pirmais);
+    return 0;
+}
+
+
