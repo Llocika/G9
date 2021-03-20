@@ -1,18 +1,22 @@
-#include <iostream>
-using namespace std;
+Ôªø
 /*
-Ab‚s realiz‚cij‚s ir j‚izveido prasÓt‚ specifisk‚ vÁrtÓbu virknes apstr‚des funkcija un j‚nodemonstrÁ t‚ darbÓb‚,
-cita starp‚ par‚dot gan s‚kotnÁj‚s, gan rezultÁjo‚s vÁrtÓbas. 
-Ab‚s programm‚s:   
-  a) j‚b˚t iespÁjai ievadÓt saraksta elementus (izveidot patvaÔÓgu sarakstu),
-  b) j‚pielieto uzrakstÓt‚ funkcija sarakstam,  
-  c) j‚izdruk‚ saraksts pÁc funkcijas darbÓbas.  
-  d) beig‚s j‚iznÓcina saraksts - korekti j‚atbrÓvo izdalÓt‚ atmiÚa(lietojot delete vai clear).
-SÓk‚kas prasÓbas sk. Laboratorijas darbu noteikumos.
-G9. UzrakstÓt funkciju, kas p‚rbauda, vai sarakst‚ ir  vismaz divi elementi ar vien‚d‚m vÁrtÓb‚m.
+av20099
+
+Ab√¢s realiz√¢cij√¢s ir j√¢izveido pras√Æt√¢ specifisk√¢ v√ßrt√Æbu virknes apstr√¢des funkcija un j√¢nodemonstr√ß t√¢ darb√Æb√¢,
+cita starp√¢ par√¢dot gan s√¢kotn√ßj√¢s, gan rezult√ßjo√∞√¢s v√ßrt√Æbas. 
+Ab√¢s programm√¢s:   
+  a) j√¢b√ªt iesp√ßjai ievad√Æt saraksta elementus (izveidot patva√Ø√Ægu sarakstu),
+  b) j√¢pielieto uzrakst√Æt√¢ funkcija sarakstam,  
+  c) j√¢izdruk√¢ saraksts p√ßc funkcijas darb√Æbas.  
+  d) beig√¢s j√¢izn√Æcina saraksts - korekti j√¢atbr√Ævo izdal√Æt√¢ atmi√≤a(lietojot delete vai clear).
+S√Æk√¢kas pras√Æbas sk. Laboratorijas darbu noteikumos.
+G9. Uzrakst√Æt funkciju, kas p√¢rbauda, vai sarakst√¢ ir  vismaz divi elementi ar vien√¢d√¢m v√ßrt√Æb√¢m.
 */
 
-
+#include <iostream>
+#include <stdlib.h>     
+#include <time.h>     
+using std::cout; using std::endl;  using std::cin;
 
 struct elem
 {
@@ -20,9 +24,8 @@ struct elem
     elem* next;
 };
 
-bool isUnique(elem* first) {
-    elem* it1 = first;
-    //elem* it2 = first;
+bool isUnique(elem* pirmais) {
+    elem* it1 = pirmais;
     
     for (it1; it1->next != NULL; it1 = it1->next)
     {
@@ -37,191 +40,99 @@ bool isUnique(elem* first) {
 
 
 
-void add_element(elem*& first, elem*& last, int i)
+void addElem(elem*& pirmais, elem*& pedejais, int i)
 {
     elem* p = new elem;
     p->num = i;
     p->next = NULL;
-    if (first == NULL) first = p;
-    else last->next = p;
-    last = p;
+    if (pirmais == NULL) pirmais = p;
+    else pedejais->next = p;
+    pedejais = p;
 };
 
-void print_list(elem* first)
+void printList(elem* pirmais)
 {
-    for (elem* p = first; p != NULL; p = p->next)
+    for (elem* p = pirmais; p != NULL; p = p->next)
     {
-        cout << p->num << endl;
+        cout << p->num << " ";
     };
+    cout << endl;
 };
 
-void delete_list(elem*& first)
+void delList(elem*& pirmais)
 {
-    elem* p = first;
+    elem* p = pirmais;
     while (p != NULL)
     {
-        first = first->next;
+        pirmais = pirmais->next;
         delete p;
-        p = first;
+        p = pirmais;
     };
 }
 
 
 int main()
 {
-    elem* first = NULL, * last = NULL, * p;
-    int i;
-    cin >> i;
-    while (i != 0)
-    {
-        add_element(first, last, i);
+    srand(time(NULL));
+    elem* pirmais = NULL, * pedejais = NULL, * p;
+    bool pats = 1;
+    cout << "Vai gribat pasi ievadit saraksta elementus? (1-ja, 0-ne)" << endl;
+    cin >> pats;
+    if (pats) {
+        int i;
+        cout << "Ievadiet saraksta elementus (0-beigt ievadu):" << endl;
         cin >> i;
-    };
-    print_list(first);
-    bool ir = isUnique(first);
-    if (ir) cout << "Ir unikals!" << endl;
-    else cout << "Nav unikals!" << endl;
-    delete_list(first);
+        while (i != 0)
+        {
+            addElem(pirmais, pedejais, i);
+            cin >> i;
+        };
+    }
+    else {
+        int size;
+        cout << "Ievadiet elementu skaitu: " << endl;
+        cin >> size;
+        while (size < 1) {
+            cout << "Elementu skaitam jabut >0. Meginiet velreiz." << endl;
+            cin >> size;
+        }
+        int apRob, augRob, tmp;
+        cout << "Ievadiet apaksejo un augsejo robezu (ar astarpi): ";
+        cin >> apRob >> augRob;
+        if (apRob > augRob) {
+            tmp = augRob;
+            augRob = apRob;
+            apRob = tmp;
+        }
+
+        for (int i = 0; i < size; i++) {
+            //int el = rand() % augRob + apRob;
+            addElem(pirmais, pedejais, rand() % augRob + apRob);   
+        }
+
+    }
+
+
+    printList(pirmais);
+    bool ir = isUnique(pirmais);
+    if (ir) cout << "Saraksta elementi ir unikaali!" << endl;
+    else cout << "Saraksta elementi atkaartojas!" << endl;
+    delList(pirmais);
     return 0;
-}
 
 
+} 
 
+/***************************Testu plƒÅns*******************
+izvƒìlƒìtƒÅ opcija         ievads              sagaidƒÅmais rezultƒÅts           faktiskais rezultƒÅts             vai sakrƒ´t?
+(1)
+pa≈°am ievadƒ´t           11 2 -10 9 2 (0)    Saraksta elementi atkaartojas!  Saraksta elementi atkaartojas!      +
+pa≈°am ievadƒ´t           1 2 3 4 5 6 7 (0)   Saraksta elementi ir unikaali!  Saraksta elementi ir unikaali!      +
 
+(0)
+izvƒìlƒìtƒÅ opcija          el. skaits          apak≈°. un aug≈°.robe≈æa      uzƒ£enerƒìtais saraksts       sagaidƒÅmais rezultƒÅts          faktiskais rezultƒÅts        vai sakrƒ´t?
+ƒ£enerƒìt automƒÅtiski         5                   0 10                        1 7 4 0 9               El. ir unikaali!              El. ir unikaali!              +
+ƒ£enerƒìt automƒÅtiski         10                  1 6                      6 6 5 5 6 5 1 1 5 3        El. atkaartojas!              El. atkaartojas!              +
+ƒ£enerƒìt automƒÅtiski         5                   100 15                  56 82 49 15 84              El. ir unikaali!              El. ir unikaali!              +
 
-
-
-
-
-///*Ab‚s realiz‚cij‚s ir j‚izveido prasÓt‚ specifisk‚ vÁrtÓbu virknes apstr‚des funkcija un j‚nodemonstrÁ t‚ darbÓb‚,
-//cita starp‚ par‚dot gan s‚kotnÁj‚s, gan rezultÁjo‚s vÁrtÓbas.
-//Ab‚s programm‚s :
-//a) j‚b˚t iespÁjai ievadÓt saraksta elementus(izveidot patvaÔÓgu sarakstu),
-//b) j‚pielieto uzrakstÓt‚ funkcija sarakstam,
-//c) j‚izdruk‚ saraksts pÁc funkcijas darbÓbas.
-//d) beig‚s j‚iznÓcina saraksts - korekti j‚atbrÓvo izdalÓt‚ atmiÚa(lietojot delete vai clear).
-//SÓk‚kas prasÓbas sk.Laboratorijas darbu noteikumos.
-//G9.UzrakstÓt funkciju, kas p‚rbauda, vai sarakst‚ ir  vismaz divi elementi ar vien‚d‚m vÁrtÓb‚m.*/
-//#include<iostream>
-//using namespace std;
-//struct elem {
-//    int num;
-//    elem* next;
-//    elem(int n) { num = n; next = NULL; }
-//};
-//void print(elem* first) {
-//    elem* p = first; /// (1)
-//    while (p) { /// (2)
-//        cout << p->num << " ";
-//        p = p->next; /// (3)
-//    }
-//    cout << endl;
-//}
-//void rem(elem*& first) {
-//    while (first) {
-//        elem* p = first->next;
-//        delete first;
-//        first = p;
-//    }
-//}
-//void append(elem*& first, elem*& last, int n) {
-//    elem* p = new elem(n);
-//    if (first == NULL) {
-//        first = last = p;
-//    }
-//    else {
-//        last->next = p; /// (1)
-//        last = p; /// (2)
-//    }
-//}
-//void deleteFirstEvenBeforeOdd(elem*& first) {
-//    elem* p = first;
-//    if (first->num % 2 == 0 and first->next and first->next->num % 2 != 0) {
-//        first = first->next;
-//        delete p;
-//    }
-//    else if (p->next and p->next->next)
-//    {
-//        while (p->next->next) {
-//            elem* q = p->next;
-//            elem* r = q->next;
-//            if (q->num % 2 == 0 and r->num % 2 != 0) {
-//                p->next = r;
-//                delete q;
-//                return;
-//            }
-//            p = p->next;
-//        }
-//    }
-//}
-//int main() {
-//    {
-//        int size;
-//        cout << "Ievadiet elementu skaitu: ";
-//        cin >> size;
-//        cout << "Ievadiet " << size << " elementus: ";
-//        int* arr = new int[size];
-//        int el;
-//        cin >> el;
-//        arr[0] = el;
-//        //int arrSize = sizeof(arr)/sizeof(arr[0]);
-//        for (int i = 1; i < size; i++) {
-//            cin >> el;
-//            arr[i] = el;
-//
-//
-//        }
-//        for (int i = 0; i < size; i++) {
-//            mylist.push_back(arr[i]);
-//
-//        }
-//
-//
-//
-//
-//
-//
-//        int aa[] = { 2,3,8,4,5 };
-//        elem* first = NULL, * last;
-//        for (int i = 0; i < 5; i++) {
-//            append(first, last, aa[i]);
-//        }
-//        print(first);
-//        deleteFirstEvenBeforeOdd(first);
-//        print(first);
-//        rem(first);
-//    }
-//    {
-//        int aa[] = { 2,4,8,6,5 };
-//        elem* first = NULL, * last;
-//        for (int i = 0; i < 5; i++) {
-//            append(first, last, aa[i]);
-//        }
-//        print(first);
-//        deleteFirstEvenBeforeOdd(first);
-//        print(first);
-//        rem(first);
-//    }
-//    {
-//        int aa[] = { 2,4,8,6,-2 };
-//        elem* first = NULL, * last;
-//        for (int i = 0; i < 5; i++) {
-//            append(first, last, aa[i]);
-//        }
-//        print(first);
-//        deleteFirstEvenBeforeOdd(first);
-//        print(first);
-//        rem(first);
-//    }
-//    {
-//        int aa[] = { 1,3,5,9 };
-//        elem* first = NULL, * last;
-//        for (int i = 0; i < 4; i++) {
-//            append(first, last, aa[i]);
-//        }
-//        print(first);
-//        deleteFirstEvenBeforeOdd(first);
-//        print(first);
-//        rem(first);
-//    }
-//}
+*/

@@ -1,22 +1,25 @@
-/*av20099
+ï»¿/*av20099
 * 04.03.2021
 * STL::list
 
-Abâs realizâcijâs ir jâizveido prasîtâ specifiskâ vçrtîbu virknes apstrâdes funkcija un jânodemonstrç tâ darbîbâ,
-cita starpâ parâdot gan sâkotnçjâs, gan rezultçjoğâs vçrtîbas. 
-Abâs programmâs:   
-  a) jâbût iespçjai ievadît saraksta elementus (izveidot patvaïîgu sarakstu),
-  b) jâpielieto uzrakstîtâ funkcija sarakstam,  
-  c) jâizdrukâ saraksts pçc funkcijas darbîbas.  
-  d) beigâs jâiznîcina saraksts - korekti jâatbrîvo izdalîtâ atmiòa(lietojot delete vai clear).
-Sîkâkas prasîbas sk. Laboratorijas darbu noteikumos.
-G9. Uzrakstît funkciju, kas pârbauda, vai sarakstâ ir  vismaz divi elementi ar vienâdâm vçrtîbâm.
-
+AbÃ¢s realizÃ¢cijÃ¢s ir jÃ¢izveido prasÃ®tÃ¢ specifiskÃ¢ vÃ§rtÃ®bu virknes apstrÃ¢des funkcija un jÃ¢nodemonstrÃ§ tÃ¢ darbÃ®bÃ¢,
+cita starpÃ¢ parÃ¢dot gan sÃ¢kotnÃ§jÃ¢s, gan rezultÃ§joÃ°Ã¢s vÃ§rtÃ®bas. 
+AbÃ¢s programmÃ¢s:   
+  a) jÃ¢bÃ»t iespÃ§jai ievadÃ®t saraksta elementus (izveidot patvaÃ¯Ã®gu sarakstu),
+  b) jÃ¢pielieto uzrakstÃ®tÃ¢ funkcija sarakstam,  
+  c) jÃ¢izdrukÃ¢ saraksts pÃ§c funkcijas darbÃ®bas.  
+  d) beigÃ¢s jÃ¢iznÃ®cina saraksts - korekti jÃ¢atbrÃ®vo izdalÃ®tÃ¢ atmiÃ²a(lietojot delete vai clear).
+SÃ®kÃ¢kas prasÃ®bas sk. Laboratorijas darbu noteikumos.
+G9. UzrakstÃ®t funkciju, kas pÃ¢rbauda, vai sarakstÃ¢ ir  vismaz divi elementi ar vienÃ¢dÃ¢m vÃ§rtÃ®bÃ¢m.
+*/
 
 #include<iostream>
 #include<fstream>
 #include<list>
-using namespace std;
+#include <stdlib.h>     
+#include <time.h>      
+
+using std::cout; using std::endl;  using std::cin; using std::list;
 
 bool isUnique(list <int>& mylist) {
     list<int>::iterator it1, it2;
@@ -32,46 +35,77 @@ bool isUnique(list <int>& mylist) {
 }
 
 
-template <typename T>
-void print(const list <T>& param) {
-    for (auto& a : param) cout << a << " ";
+//template <typename T>
+//void print(const list <T>& param) {
+//    for (auto& a : param) cout << a << " ";
+//    cout << endl;
+//}
+
+void print(const list<int>& a) {
+    for (auto& i : a) {
+        cout << i << " ";
+    }
     cout << endl;
 }
 
-//void print(const list<int>& a) {
- //   for (auto& i : a) {
-   //     cout << i << " ";
-    //}
-    //cout << endl;
-//}
-
 int main() {
+    srand(time(NULL));
     list<int> mylist;
     int size;
+    bool pats = 1;
+    cout << "Vai gribat pasi ievadit saraksta elementus? (1-ja, 0-ne)" << endl;
+    cin >> pats;
     cout << "Ievadiet elementu skaitu: ";
     cin >> size;
-    cout << "Ievadiet " << size << " elementus: ";
-    int* arr = new int[size];
-    int el;
-    cin >> el;
-    arr[0] = el;
-    //int arrSize = sizeof(arr)/sizeof(arr[0]);
-    for (int i = 1; i< size; i++) {
-        cin >> el;
-        arr[i] = el;
-        
+    while (size < 1) {
+        cout << "Elementu skaitam jabut >0. Meginiet velreiz." << endl;
+        cin >> size;
 
     }
-    for (int i = 0; i < size; i++) {
-        mylist.push_back(arr[i]);
+    if (pats) {
+        cout << "Ievadiet " << size << " elementus: ";
+        int el;
+        for (int i = 0; i < size; i++) {
+            cin >> el;
+            mylist.push_back(el);
+        }
+
+    }
+    else {
+        int apRob, augRob, tmp;
+        cout << "Ievadiet apaksejo un augsejo robezu (ar astarpi): ";
+        cin >> apRob >> augRob;
+        if (apRob > augRob) {
+            tmp = augRob;
+            augRob = apRob;
+            apRob = tmp;
+        }
+        
+        for (int i = 0; i < size; i++) {
+
+            mylist.push_back(rand()%augRob +apRob);
+        }
 
     }
     bool ir = isUnique(mylist);
     if (ir) cout << "Saraksts sastav no unikaliem elementiem"<<endl;
     else cout << "Saraksta ir duplikati" << endl;
-    //list<int> a = { 2,3,8,4,5 };
     print(mylist);
-    delete [] arr;
     mylist.clear();
 }
+/***************************Testu plÄns*******************
+izvÄ“lÄ“tÄ opcija          el. skaits          ievads              sagaidÄmais rezultÄts           faktiskais rezultÄts        vai sakrÄ«t?
+(1)
+paÅ¡am ievadÄ«t               5               11 2 -10 9 2        Saraksta ir duplikati           Saraksta ir duplikati           +
+paÅ¡am ievadÄ«t               7               1 2 3 4 5 6 7       Saraksts sastav no unikaliem    Saraksts sastav no unikaliem    +
+                                                                elementiem                      elementiem
+paÅ¡am ievadÄ«t               0               -                   El.skaitam jabut>0!             El.skaitam jabut>0!             +
+paÅ¡am ievadÄ«t               5               0 0 0 0             Saraksta ir duplikati           Saraksta ir duplikati           +
+
+(0)
+izvÄ“lÄ“tÄ opcija          el. skaits          apakÅ¡. un augÅ¡.robeÅ¾a      uzÄ£enerÄ“tais saraksts       sagaidÄmais rezultÄts          faktiskais rezultÄts        vai sakrÄ«t?
+Ä£enerÄ“t automÄtiski         5                   0 10                        0 7 2 9 8               Sastav no unik.el.              Sastav no unik.el.              +    
+Ä£enerÄ“t automÄtiski         10                  1 25                 10 6 11 20 12 12 1 1 18 2      Saraksta ir duplikati           Saraksta ir duplikati           +
+Ä£enerÄ“t automÄtiski         5                   100 15               97 17 87 112 84                Sastav no unik.el.              Sastav no unik.el.              +    
+
 */
