@@ -1,6 +1,6 @@
-﻿/*B1[5]. Funkcija countExtraAdjacentSpaces, kas izskaita, cik failā ir lieku atkārtotu tukšumu (katrā tukšumu virknē garumā n ir n-1 lieki atkārtoti tukšumi).
+/*B1[5]. Funkcija countExtraAdjacentSpaces, kas izskaita, cik failā ir lieku atkārtotu tukšumu (katrā tukšumu virknē garumā n ir n-1 lieki atkārtoti tukšumi).
 Piemēram (* apzīmē tukšumu), “alpha***beta**gamma” → 3
-
+*/
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -20,10 +20,10 @@ int main() {
         cout << cnt << endl;
         fin.close();
     }
-}*/
+}
 /*B2[9]. Funkcija removeExtraAdjacentSpaces, kas otrā failā izdrukā faila f tekstu pārveidotu tā, lai tas būtu bez atkārtotiem tukšumiem (vairāku tukšumu virkni aizstājot ar vienu tukšumu).
 Piemēram (* apzīmē tukšumu), “*alpha*beta***gamma*******delta” → “*alpha*beta*gamma*delta”
-
+*/
 #include<iostream>
 #include<fstream>
 using namespace std;
@@ -47,10 +47,10 @@ int main() {
         }
         fin.close();
     }
-}*/
+}
 
 /*C1[5]. Funkcija incDecOdd, kas sarakstā palielina par 1 negatīvos nepāra skaitļus, bet samazina par 1 pozitīvos nepāra skaitļus. Piemēram, {-2,3,-7,-4,5}→{-2,2,-6,-4,4}
-
+*/
 #include<iostream>
 using namespace std;
 struct elem {
@@ -105,11 +105,11 @@ int main() {
     rem(first);
 }
 
-*/
+
 /*
 
 C2[9]. Funkcija deleteFirstEvenBeforeOdd, kas izmet no saraksta pirmo pāra skaitli, kurš atrodas pirms nepāra skaitļa. Piemēram, {2,3,8,4,5}→{3,8,4,5}; {2,4,8,6,5}→{2,4,8,5}; {2,4,8,6,-2}→{2,4,8,6,-2} (nemainās, jo tikai pāra); {1,3,5,9}→{1,3,5,9} (nemainās, jo tikai nepāra)
-
+*/
 #include<iostream>
 using namespace std;
 struct elem {
@@ -209,11 +209,11 @@ int main() {
     }
 }
 
-*/
+
 /*
 D. Uzrakstīt C++ funkciju, kas apstrādā STL list sarakstu no int vērtībām.
 
-D1[5]. (tas pats uzdevums, kas aprakstīts C1)
+D1[5]. (tas pats uzdevums, kas aprakstīts C1)*/
 #include<iostream>
 #include<fstream>
 #include<list>
@@ -255,11 +255,11 @@ int main() {
     }
 }
 
-*/
+
 
 /*
 
-D2[9]. (tas pats, uzdevums kas aprakstīts C2)
+D2[9]. (tas pats, uzdevums kas aprakstīts C2)*/
 #include<iostream>
 #include<fstream>
 #include<list>
@@ -306,4 +306,85 @@ int main() {
         print(a);
     }
 }
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<fstream>
+//#include<list>
+//using namespace std;
+//void print(const list<int> &a) {
+//    for(auto &i: a) {
+//        cout<<i<<" ";   }
+//    cout<<endl;
+//}
+//void deleteFirstEvenBeforeOdd(list<int> &a) {
+//    auto k = a.begin();
+//    ++k;
+//    for(auto i=a.begin();k!=a.end();i++,k++) {
+//        if (*i%2==0 and *k%2!=0) {
+//            a.erase(i);
+//            return;
+//        }
+//    }
+//}
+//int main() {
+//    {
+//        list<int> a = {2,3,8,4,5};
+//        print(a);
+//        deleteFirstEvenBeforeOdd(a);
+//        print(a);
+//    }
+//    {
+//        list<int> a = {2,4,8,6,5};
+//        print(a);
+//        deleteFirstEvenBeforeOdd(a);
+//        print(a);
+//    }
+//    {
+//        list<int> a = {2,4,8,6,-2};
+//        print(a);
+//        deleteFirstEvenBeforeOdd(a);
+//        print(a);
+//    }
+//    {
+//        list<int> a = {1,3,5,9};
+//        print(a);
+//        deleteFirstEvenBeforeOdd(a);
+//        print(a);
+//    }
+//}
