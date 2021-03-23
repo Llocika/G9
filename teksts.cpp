@@ -140,32 +140,54 @@ int main()
 (katrā tukšumu virknē garumā n ir n-1 lieki atkārtoti tukšumi).
 Piemēram (* apzīmē tukšumu), “alpha***beta**gamma” → 3
 */
-//#include<iostream>
-//#include<fstream>
-//#include<string>
-//using namespace std;
-//
-//int countExtraAdjacentSpaces(fstream &fin) {
-//    int cnt = 0;
-//    string s;
-//    while (getline(fin, s, '\n')) {
-//        for (int i = 1; i < s.length(); ++i) {
-//            if (s[i - 1] == ' ' and s[i] == ' ') ++cnt;
-//        }
-//    }
-//    return cnt;
-//    
-//
-//}
-//int main() {
-//    fstream fin("in.txt", ios::in);
-//    
-//    if (fin.is_open())
-//    {
-//        cout<<countExtraAdjacentSpaces(fin);
-//        fin.close();
-//    }
-//}
+#include<iostream>
+#include<fstream>
+#include<string>
+using namespace std;
+
+int countExtraAdjacentSpaces(fstream &fin) {
+    int cnt = 0;
+    string s;
+    while (getline(fin, s, '\n')) {
+        for (int i = 1; i < s.length(); ++i) {
+            if (s[i - 1] == ' ' and s[i] == ' ') ++cnt;
+        }
+    }
+    return cnt;
+    
+
+}
+int main() {
+    fstream fin("in.txt", ios::in);
+    
+    if (fin.is_open())
+    {
+        cout<<countExtraAdjacentSpaces(fin);
+        fin.close();
+    }
+}
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main() {
+    fstream fin ("in.txt",ios::in);
+    int cnt=0;
+    string s;
+    if(fin.is_open())
+    {
+        while(fin) {
+            getline(fin,s,'\n');
+            for (int i=1;i<s.length();++i) {
+                if (s[i-1]==' ' and s[i]==' ') ++cnt;
+            }
+        }
+        cout<<cnt<<endl;
+        fin.close();
+    }
+}
+
+
 
 /*B2[9]. Funkcija removeExtraAdjacentSpaces, kas otrā failā izdrukā faila f tekstu pārveidotu tā, lai tas būtu bez atkārtotiem tukšumiem (vairāku tukšumu virkni aizstājot ar vienu tukšumu).
 Piemēram (* apzīmē tukšumu), “*alpha*beta***gamma*******delta” → “*alpha*beta*gamma*delta”
