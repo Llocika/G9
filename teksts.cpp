@@ -1,5 +1,5 @@
 //lab- zZuters
-/*#include <fstream>
+#include <fstream>
 #include <iostream>
 using namespace std;
 
@@ -19,16 +19,12 @@ int main ()
     fin.close ();
     cout << endl << filesize << endl;
     return 0;
-}*/
+}
 
 
 
-//#include <fstream>
-//#include <iostream> 
-//using namespace std;
-//
 
-/*#include <fstream>
+#include <fstream>
 #include <iostream>
 using namespace std;
 
@@ -47,10 +43,10 @@ int main()
     fout.close();
     return 0;
 }
-*/
 
 
-////
+
+//////////////////////////////
 
 
 
@@ -192,65 +188,66 @@ int main() {
 /*B2[9]. Funkcija removeExtraAdjacentSpaces, kas otrā failā izdrukā faila f tekstu pārveidotu tā, lai tas būtu bez atkārtotiem tukšumiem (vairāku tukšumu virkni aizstājot ar vienu tukšumu).
 Piemēram (* apzīmē tukšumu), “*alpha*beta***gamma*******delta” → “*alpha*beta*gamma*delta”
 */
-//#include<iostream>
-//#include<fstream>
-//#include<string>
-//using namespace std;
-//
-//
-//void removeExtraAdjacentSpaces(ifstream &fin, ofstream &fout) {
-//    string s;
-//    while (getline(fin, s, '\n')) {
-//        string t;
-//        if (s.length() > 0)
-//        {
-//            t += s[0];
-//            for (int i = 1; i < s.length(); ++i) {
-//                if (s[i - 1] != ' ' or s[i] != ' ') t += s[i]; //ja s[i-1]!=' ', tad s[i] var būt gan tukšums, gan burts -> jāliek
-//                //ja s[i-1] ir tukšums, bet s[i]- nav, tad liekam s[i]
-//            }
-//        }
-//        fout << t << endl;
-//    }
-//    fin.close();
-//}
-//
-//
-//
-//int main() {
-//    ifstream fin("in.txt");
-//    ofstream fout("out.txt");
-//    //string s;
-//    if (fin.is_open())
-//    {
-//        removeExtraAdjacentSpaces(fin, fout);
-//        
-//    }
-//}
-//
-//
+#include<iostream>
+#include<fstream>
+#include<string>
+using namespace std;
 
-//int main() {
-//    ifstream fin("in.txt");
-//    ofstream fout("out.txt");
-//    string s;
-//    if (fin.is_open())
-//    {
-//        while (getline(fin, s, '\n')) {
-//            string t;
-//            if (s.length() > 0)
-//            {
-//                t += s[0];
-//                for (int i = 1; i < s.length(); ++i) {
-//                    if (s[i - 1] != ' ' or s[i] != ' ') t += s[i]; //ja s[i-1]!=' ', tad s[i] var būt gan tukšums, gan burts -> jāliek
-//                    //ja s[i-1] ir tukšums, bet s[i]- nav, tad liekam s[i]
-//                }
-//            }
-//            fout << t << endl;
-//        }
-//        fin.close();
-//    }
-//}
+
+void removeExtraAdjacentSpaces(ifstream &fin, ofstream &fout) {
+    string s;
+    while (getline(fin, s, '\n')) {
+        string t;
+        if (s.length() > 0)
+        {
+            t += s[0];
+            for (int i = 1; i < s.length(); ++i) {
+                if (s[i - 1] != ' ' or s[i] != ' ') t += s[i]; //ja s[i-1]!=' ', tad s[i] var būt gan tukšums, gan burts -> jāliek
+                //ja s[i-1] ir tukšums, bet s[i]- nav, tad liekam s[i]
+            }
+        }
+        fout << t << endl;
+    }
+    fin.close();
+}
+
+
+
+int main() {
+    ifstream fin("in.txt");
+    ofstream fout("out.txt");
+    //string s;
+    if (fin.is_open())
+    {
+        removeExtraAdjacentSpaces(fin, fout);
+        
+    }
+}
+
+
+/*ZUTERS*/
+
+int main() {
+    ifstream fin("in.txt");
+    ofstream fout("out.txt");
+    string s;
+    if (fin.is_open())
+    {
+        while (getline(fin, s, '\n')) {
+            string t;
+            if (s.length() > 0)
+            {
+                t += s[0];
+                for (int i = 1; i < s.length(); ++i) {
+                    if (s[i - 1] != ' ' or s[i] != ' ') t += s[i]; //ja s[i-1]!=' ', tad s[i] var būt gan tukšums, gan burts -> jāliek
+                    //ja s[i-1] ir tukšums, bet s[i]- nav, tad liekam s[i]
+                }
+            }
+            fout << t << endl;
+        }
+        fin.close();
+    }
+}
 //
 
 
@@ -324,3 +321,7 @@ Piemēram (* apzīmē tukšumu), “*alpha*beta***gamma*******delta” → “*a
 //    return 0;
 //
 //}
+
+
+
+
